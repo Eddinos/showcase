@@ -90,16 +90,14 @@ export class ResumePage extends Component {
 
   render () {
     return (
-      <Layout>
         <div className="resume">
-        <Banner title="My resume" backgroundImage={`url(${bannerImg})`} />
-        <Duo eltLeft={<PdfText />} eltRight={<PdfLink />} style={pdfStyle}/>
-        {this.createSkillsComponents()}
-        {/* <h1 className="content-text mid-title mid-title--blue">Work Experiences</h1> */}
-        {/* {this.createXpComponents()} */}
-        {/* <div style={{height: '200px'}}></div> */}
-      </div>
-      </Layout>
+          <Banner title="My resume" backgroundImage={`url(${bannerImg})`} />
+          <Duo eltLeft={<PdfText />} eltRight={<PdfLink />} style={pdfStyle}/>
+          {this.createSkillsComponents()}
+          {/* <h1 className="content-text mid-title mid-title--blue">Work Experiences</h1> */}
+          {/* {this.createXpComponents()} */}
+          {/* <div style={{height: '200px'}}></div> */}
+        </div>
     )
   }
 }

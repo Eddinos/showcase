@@ -66,17 +66,15 @@ export default class Home extends Component {
 
   render () {
     return (
-      <Layout>
         <div className="home">
-        {this.state.bgImg && <Banner title="Welcome to my sh*t" backgroundImage={`url(${this.state.bgImg})`} />}
+          {this.state.bgImg && <Banner title="Welcome to my sh*t" backgroundImage={`url(${this.state.bgImg})`} />}
 
-        <Who />
+          <Who />
 
-        <What currentProject={this.props.currentProject}/>
+          <What currentProject={this.props.currentProject}/>
 
-        <Contact />
-      </div>
-      </Layout>
+          <Contact />
+        </div>
     );
   }
 }

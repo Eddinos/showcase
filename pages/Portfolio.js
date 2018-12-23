@@ -67,18 +67,16 @@ export class PortfolioPage extends Component {
 
   render () {
     return (
-      <Layout>
         <div className="portfolio">
-        <Banner
-          title="My projects"
-          backgroundImage={`url(${titlePic})`}
-        />
+          <Banner
+            title="My projects"
+            backgroundImage={`url(${titlePic})`}
+          />
 
-        <Intro/>
+          <Intro/>
 
-        {this.renderProjects()}
-      </div>
-      </Layout>
+          {this.renderProjects()}
+        </div>
     )
   }
 }
