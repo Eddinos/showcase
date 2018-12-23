@@ -10,6 +10,7 @@ import Banner from '../components/Banner/Banner'
 import Who from '../components/Who/Who'
 import What from '../components/What/What'
 import Contact from '../components/Contact/Contact'
+import Layout from '../components/Layout/Layout'
 import './Home.scss'
 
 const hometowns = [
@@ -65,7 +66,8 @@ export default class Home extends Component {
 
   render () {
     return (
-      <div className="home">
+      <Layout>
+        <div className="home">
         {this.state.bgImg && <Banner title="Welcome to my sh*t" backgroundImage={`url(${this.state.bgImg})`} />}
 
         <Who />
@@ -74,6 +76,7 @@ export default class Home extends Component {
 
         <Contact />
       </div>
+      </Layout>
     );
   }
 }
