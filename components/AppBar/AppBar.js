@@ -7,6 +7,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import ViewHeadLine from 'material-ui/svg-icons/action/view-headline';
 import Clear from 'material-ui/svg-icons/content/clear';
 import logo from '../../assets/img/ed.png';
+import Link from 'next/link'
 
 
 
@@ -91,8 +92,10 @@ export default class AppBar extends Component {
         <div className="app-bar-navigation">
           <a href="/" className="nav-button">Home</a>
 
-          <a href="/portfolio" className="nav-button">Portfolio</a>
-          <a href="/resume" className="nav-button">Resume</a>
+          <a href="/Portfolio" className="nav-button">Portfolio</a>
+          <Link href="/Resume">
+            <a className="nav-button">Resume</a>
+          </Link>
 
         </div>
         <div className="app-bar-nav-mobile">
@@ -118,8 +121,8 @@ export default class AppBar extends Component {
           <div className="nav">
             <a onClick={() => {this.displayMobileMenu(false)}} href="/" className="nav-button">Home</a>
 
-            <a onClick={() => {this.displayMobileMenu(false)}} href="/portfolio" className="nav-button">Portfolio</a>
-            <a onClick={() => {this.displayMobileMenu(false)}} href="/resume" className="nav-button">Resume</a>
+            <a onClick={() => {this.displayMobileMenu(false)}} href="/Portfolio" className="nav-button">Portfolio</a>
+            <a onClick={() => {this.displayMobileMenu(false)}} href="/Resume" className="nav-button">Resume</a>
           </div>
         </div>
       </div>

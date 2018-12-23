@@ -1,16 +1,17 @@
 import React from 'react';
-import { Component, PropTypes } from 'react';
-import titlePic from '../../../../tools/images/adaptedBasketball.jpg';
+import { Component } from 'react';
+import titlePic from '../assets/img/adaptedBasketball.jpg';
 import './Portfolio.scss';
-import Card from '../../atoms/Card/Card';
-import NavLink from '../../atoms/NavLink/NavLink';
-import Presenter from '../../organisms/Presenter/Presenter';
-import Banner from '../../atoms/Banner/Banner';
-import DataContainer from '../../bonds/DataContainer/DataContainer';
-import { Link } from 'react-router';
+import Card from '../components/Card/Card';
+import NavLink from '../components/NavLink/NavLink';
+import Presenter from '../components/Presenter/Presenter';
+import Banner from '../components/Banner/Banner';
+import Layout from '../components/Layout/Layout'
+// import DataContainer from '../../bonds/DataContainer/DataContainer';
+// import { Link } from 'react-router';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import { connect } from 'react-redux';
-import { getAllProjects } from '../../../actions'
+// import { connect } from 'react-redux';
+// import { getAllProjects } from '../../../actions'
 
 const Intro = () => (
   <div className="intro content-text">
@@ -25,13 +26,14 @@ export class PortfolioPage extends Component {
   }
 
   componentWillMount () {
-    if (this.props.projects.length === 0) {
+    if (this.props.projects && this.props.projects.length === 0) {
       this.props.getProjects();
     }
   }
 
   renderProjects () {
-    let page = this.props.location.pathname;
+    let page = this.props.location && this.props.location.pathname;
+    if (!this.props.projects) return null
     return (
       <div>
         <Presenter>
@@ -65,7 +67,8 @@ export class PortfolioPage extends Component {
 
   render () {
     return (
-      <div className="portfolio">
+      <Layout>
+        <div className="portfolio">
         <Banner
           title="My projects"
           backgroundImage={`url(${titlePic})`}
@@ -75,27 +78,28 @@ export class PortfolioPage extends Component {
 
         {this.renderProjects()}
       </div>
+      </Layout>
     )
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    projects: state.projects
-  }
-}
+// const mapStateToProps = (state) => {
+//   return {
+//     projects: state.projects
+//   }
+// }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    getProjects () {
-      dispatch(getAllProjects())
-    }
-  }
-}
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     getProjects () {
+//       dispatch(getAllProjects())
+//     }
+//   }
+// }
 
-const Portfolio = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(PortfolioPage)
+// const Portfolio = connect(
+//   mapStateToProps,
+//   mapDispatchToProps
+// )(PortfolioPage)
 
-export default Portfolio
+export default PortfolioPage

@@ -1,21 +1,22 @@
 import React from 'react';
 import { Component, PropTypes } from 'react';
 import './Resume.scss';
-import cvPDF from '../../../../tools/cv.pdf'
-import Slider from '../../bonds/Slider/Slider';
-import Skills from '../../organisms/Skills/Skills';
-import Duo from '../../bonds/Duo/Duo';
-import Banner from '../../atoms/Banner/Banner';
-import Experience from '../../molecules/Experience/Experience';
-import bannerImg from '../../../../tools/images/venice_desktop.jpg';
-import { getXp, getSkills } from '../../../api'
-import { getAllSkills, getAllExperiences } from '../../../actions'
-import { connect } from 'react-redux';
+// import cvPDF from '../assets/cv.pdf'
+// import Slider from '../../bonds/Slider/Slider';
+// import Skills from '../../organisms/Skills/Skills';
+import Duo from '../components/Duo/Duo'
+import Banner from '../components/Banner/Banner';
+// import Experience from '../../molecules/Experience/Experience';
+import bannerImg from '../assets/img/venice_desktop.jpg';
+// import { getXp, getSkills } from '../../../api'
+// import { getAllSkills, getAllExperiences } from '../../../actions'
+// import { connect } from 'react-redux';
+import Layout from '../components/Layout/Layout'
 
 
 const PdfLink = (props) => {
   return (
-    <a className="pdfLink" href={cvPDF} target="_blank">
+    <a className="pdfLink" href={'/static/cv.pdf'} target="_blank">
       <div className="pdf">
         <span className="icon-file-pdf"></span>
       </div>
@@ -44,12 +45,12 @@ export class ResumePage extends Component {
   }
 
   componentDidMount() {
-    if (this.props.experiences.length === 0) {
-      this.props.getExperiences();
-    }
-    if (this.props.skills.length === 0) {
-      this.props.getSkills();
-    }
+    // if (this.props.experiences.length === 0) {
+    //   this.props.getExperiences();
+    // }
+    // if (this.props.skills.length === 0) {
+    //   this.props.getSkills();
+    // }
   }
 
   createSkillsComponents() {
@@ -89,39 +90,41 @@ export class ResumePage extends Component {
 
   render () {
     return (
-      <div className="resume">
+      <Layout>
+        <div className="resume">
         <Banner title="My resume" backgroundImage={`url(${bannerImg})`} />
         <Duo eltLeft={<PdfText />} eltRight={<PdfLink />} style={pdfStyle}/>
         {this.createSkillsComponents()}
-        <h1 className="content-text mid-title mid-title--blue">Work Experiences</h1>
-        {this.createXpComponents()}
-        <div style={{height: '200px'}}></div>
+        {/* <h1 className="content-text mid-title mid-title--blue">Work Experiences</h1> */}
+        {/* {this.createXpComponents()} */}
+        {/* <div style={{height: '200px'}}></div> */}
       </div>
+      </Layout>
     )
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    skills: state.skills,
-    experiences: state.experiences
-  }
-}
+// const mapStateToProps = (state) => {
+//   return {
+//     skills: state.skills,
+//     experiences: state.experiences
+//   }
+// }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    getSkills () {
-      dispatch(getAllSkills())
-    },
-    getExperiences () {
-      dispatch(getAllExperiences())
-    }
-  }
-}
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     getSkills () {
+//       dispatch(getAllSkills())
+//     },
+//     getExperiences () {
+//       dispatch(getAllExperiences())
+//     }
+//   }
+// }
 
-const Resume = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ResumePage)
+// const Resume = connect(
+//   mapStateToProps,
+//   mapDispatchToProps
+// )(ResumePage)
 
-export default Resume
+export default ResumePage

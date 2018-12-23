@@ -1,5 +1,41 @@
 // TODO Refactor this entire file/component
 @import "../../theme/variables.scss";
+@import "../../assets/fonts/Lato/latofonts.css";
+
+.content-text {
+  font-family: 'LatoWebSemibold';
+  font-size: 3em;
+  text-align: center;
+  font-variant: small-caps;
+}
+
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.container {
+  color: white;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.title {
+  font-variant: small-caps;
+  font-family: 'LatoWebSemibold';
+  font-size: 3em;
+}
+
+.content {
+  padding: 25vh 0 25vh 0;
+  margin: 0 auto;
+}
+
+body {
+  margin: 0;
+}
 
 .nav-button {
   font-variant: small-caps;
