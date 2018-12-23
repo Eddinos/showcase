@@ -1,4 +1,8 @@
-module.exports = {
+const withImages = require('next-images')
+const withFonts = require('next-fonts')
+const withSass = require('@zeit/next-sass')
+
+module.exports = withSass(withFonts(withImages({
   webpack: config => {
     // Fixes npm packages that depend on `fs` module
     config.node = {
@@ -6,11 +10,5 @@ module.exports = {
     }
 
     return config
-  },
-  exportPathMap () {
-    return {
-      '/': { page: '/' },
-      '/hello': { page: '/hello' }
-    }
   }
-}
+})))

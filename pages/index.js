@@ -39,7 +39,7 @@ const Home = () => (
       </div>
     </div>
 
-    <Link href='/hello'>
+    <Link href='/Home'>
       <button>hello</button>
     </Link>
     
