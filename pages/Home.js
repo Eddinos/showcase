@@ -9,6 +9,7 @@ import parisMobile from '../assets/img/paris_mobile.jpg'
 import Banner from '../components/Banner/Banner'
 import Who from '../components/Who/Who'
 import What from '../components/What/What'
+import Contact from '../components/Contact/Contact'
 import './Home.scss'
 
 const hometowns = [
@@ -71,7 +72,7 @@ export default class Home extends Component {
 
         <What currentProject={this.props.currentProject}/>
 
-        {/* <Contact /> */}
+        <Contact />
       </div>
     );
   }
