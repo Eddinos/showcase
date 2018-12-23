@@ -1,6 +1,14 @@
 @import "../theme/variables.scss";
 @import "../assets/fonts/Lato/latofonts.css";
 @import "../assets/fonts/Icomoon/style.css";
+@import url('https://fonts.googleapis.com/css?family=Galada');
+
+.content-text {
+  font-family: 'LatoWebSemibold';
+  font-size: 3em;
+  text-align: center;
+  font-variant: small-caps;
+}
 
 .centered {
   position: absolute;

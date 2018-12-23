@@ -7,6 +7,8 @@ import shanghaiMobile from '../assets/img/shanghai_mobile.jpg'
 import paris from '../assets/img/paris_desktop.jpg'
 import parisMobile from '../assets/img/paris_mobile.jpg'
 import Banner from '../components/Banner/Banner'
+import Who from '../components/Who/Who'
+import What from '../components/What/What'
 import './Home.scss'
 
 const hometowns = [
@@ -61,14 +63,13 @@ export default class Home extends Component {
   }
 
   render () {
-    // var bgImg = this.setCurrentHometown();
     return (
       <div className="home">
         {this.state.bgImg && <Banner title="Welcome to my sh*t" backgroundImage={`url(${this.state.bgImg})`} />}
 
-        {/* <Who /> */}
+        <Who />
 
-        {/* <What currentProject={this.props.currentProject}/> */}
+        <What currentProject={this.props.currentProject}/>
 
         {/* <Contact /> */}
       </div>
