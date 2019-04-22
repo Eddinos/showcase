@@ -1,11 +1,9 @@
 import React from 'react';
 import { Component } from 'react';
 import s from './AppBar.scss';
-import IconButton from 'material-ui/IconButton';
-import baseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import ViewHeadLine from 'material-ui/svg-icons/action/view-headline';
-import Clear from 'material-ui/svg-icons/content/clear';
+import IconButton from '@material-ui/core/IconButton';
+// import ViewHeadLine from '@material-ui/core/svg-icons/action/view-headline';
+// import Clear from '@material-ui/core/svg-icons/content/clear';
 import logo from '../../assets/img/ed.png';
 import Link from 'next/link'
 
@@ -38,11 +36,6 @@ export default class AppBar extends Component {
       burgerStyle: burgerStyleMedium,
       closeStyle: closeStyleMedium
     };
-  }
-
-  // Seems to be required w/ mui even if I'm just using an Icon
-  getChildContext () {
-    return { muiTheme: getMuiTheme(baseTheme) };
   }
 
   componentDidMount() {
@@ -101,20 +94,20 @@ export default class AppBar extends Component {
         <div className="app-bar-nav-mobile">
           <IconButton
            className="menu-button--burger"
-           iconStyle={style.icon}
+           iconstyle={style.icon}
            style={this.state.burgerStyle}
            onClick={() => {this.displayMobileMenu(true)}}
           >
-            <ViewHeadLine />
+            {/* <ViewHeadLine /> */}
           </IconButton>
 
           <IconButton
            className="menu-button--cross"
-           iconStyle={style.icon}
+           iconstyle={style.icon}
            style={this.state.closeStyle}
            onClick={() => {this.displayMobileMenu(false)}}
           >
-            <Clear />
+            {/* <Clear /> */}
           </IconButton>
         </div>
         <div className="mobile-menu">
@@ -128,8 +121,4 @@ export default class AppBar extends Component {
       </div>
     );
   }
-}
-
-AppBar.childContextTypes = {
-  muiTheme: () => null
 }

@@ -6,11 +6,14 @@ import './Resume.scss';
 // import Skills from '../../organisms/Skills/Skills';
 import Duo from '../components/Duo/Duo'
 import Banner from '../components/Banner/Banner';
+import Slider from '../components/Slider/Slider';
 // import Experience from '../../molecules/Experience/Experience';
 import bannerImg from '../assets/img/venice_desktop.jpg';
 // import { getXp, getSkills } from '../../../api'
-// import { getAllSkills, getAllExperiences } from '../../../actions'
-// import { connect } from 'react-redux';
+import { getAllSkills, getAllExperiences } from '../actions'
+import {getXp} from '../api'
+import { connect } from 'react-redux';
+import axios from 'axios'
 import Layout from '../components/Layout/Layout'
 
 
@@ -34,7 +37,7 @@ const PdfText = (props) => {
 }
 const pdfStyle = {background: '#f9f9f9', padding: '15vh 0'};
 
-export class ResumePage extends Component {
+class ResumePage extends Component {
   constructor(props) {
     super(props);
 
@@ -42,6 +45,14 @@ export class ResumePage extends Component {
       skills: {},
       experiences: []
     }
+  }
+
+  static async getInitialProps ({reduxStore, req}) {
+    reduxStore.dispatch(getAllExperiences());
+    reduxStore.dispatch(getAllSkills());
+    // axios.get("http://snt-backend.herokuapp.com/staticData/experiences.json").then(data => console.log(data.data))
+    
+    return {};
   }
 
   componentDidMount() {
@@ -89,40 +100,41 @@ export class ResumePage extends Component {
   }
 
   render () {
+    console.log(this.props)
     return (
         <div className="resume">
           <Banner title="My resume" backgroundImage={`url(${bannerImg})`} />
           <Duo eltLeft={<PdfText />} eltRight={<PdfLink />} style={pdfStyle}/>
           {this.createSkillsComponents()}
-          {/* <h1 className="content-text mid-title mid-title--blue">Work Experiences</h1> */}
-          {/* {this.createXpComponents()} */}
-          {/* <div style={{height: '200px'}}></div> */}
+          <h1 className="content-text mid-title mid-title--blue">Work Experiences</h1>
+          {this.createXpComponents()}
+          <div style={{height: '200px'}}></div>
         </div>
     )
   }
 }
 
-// const mapStateToProps = (state) => {
-//   return {
-//     skills: state.skills,
-//     experiences: state.experiences
-//   }
-// }
+const mapStateToProps = (state) => {
+  return {
+    skills: state.skills,
+    experiences: state.experiences
+  }
+}
 
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     getSkills () {
-//       dispatch(getAllSkills())
-//     },
-//     getExperiences () {
-//       dispatch(getAllExperiences())
-//     }
-//   }
-// }
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getSkills () {
+      dispatch(getAllSkills())
+    },
+    getExperiences () {
+      dispatch(getAllExperiences())
+    }
+  }
+}
 
 // const Resume = connect(
 //   mapStateToProps,
 //   mapDispatchToProps
 // )(ResumePage)
 
-export default ResumePage
+export default connect(mapStateToProps)(ResumePage)

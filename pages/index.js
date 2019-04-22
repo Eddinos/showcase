@@ -1,96 +1,80 @@
-import React from 'react'
-import Link from 'next/link'
-import Head from '../components/head'
-import Nav from '../components/nav'
+import { Component } from 'react'
+import lyon from '../assets/img/lyon_desktop.jpg'
+import lyonMobile from '../assets/img/lyon_mobile.jpg'
+import shanghai from '../assets/img/shanghai_desktop.jpg'
+import shanghaiWide from '../assets/img/shanghai_wide.jpg'
+import shanghaiMobile from '../assets/img/shanghai_mobile.jpg'
+import paris from '../assets/img/paris_desktop.jpg'
+import parisMobile from '../assets/img/paris_mobile.jpg'
+import Banner from '../components/Banner/Banner'
+import Who from '../components/Who/Who'
+import What from '../components/What/What'
+import Contact from '../components/Contact/Contact'
+import Layout from '../components/Layout/Layout'
+import './Home.scss'
 
-const Home = () => (
-  <div>
-    <Head title="Home" />
-    <Nav />
+const hometowns = [
+  {
+    name: 'Lyon',
+    src: lyon,
+    srcsetXL: lyon,
+    srcsetMobile: lyonMobile,
+    opacity: 1
+  },
+  {
+    name: 'SH',
+    src: shanghai,
+    srcsetXL: shanghaiWide,
+    srcsetMobile: shanghaiMobile,
+    opacity: 0
+  },
+  {
+    name: 'Paname',
+    src: paris,
+    srcsetXL: paris,
+    srcsetMobile: parisMobile,
+    opacity: 0
+  }
+]
 
-    <div className="hero">
-      <h1 className="title">Welcome to Next!</h1>
-      <p className="description">
-        To get started, edit <code>pages/index.js</code> and save to reload.
-      </p>
+export default class Home extends Component {
+  constructor (props) {
+    super(props);
+    this.state = {
+      hometown: hometowns[Math.floor(Math.random()*3)]
+    };
+  }
+  
+  setCurrentHometown () {
+    if (!this.state.hometown) {
+      return '';
+    }
+    if (screen.width < 480) {
+      return this.state.hometown.srcsetMobile;
+    }
+    else if (screen.width < 1440) {
+      return this.state.hometown.src;
+    }
+    return this.state.hometown.srcsetXL;
+  }
 
-      <div className="row">
-        <Link href="https://github.com/zeit/next.js#getting-started">
-          <a className="card">
-            <h3>Getting Started &rarr;</h3>
-            <p>Learn more about Next on Github and in their examples</p>
-          </a>
-        </Link>
-        <Link href="https://open.segment.com/create-next-app">
-          <a className="card">
-            <h3>Examples &rarr;</h3>
-            <p>
-              Find other example boilerplates on the{' '}
-              <code>create-next-app</code> site
-            </p>
-          </a>
-        </Link>
-        <Link href="https://github.com/segmentio/create-next-app">
-          <a className="card">
-            <h3>Create Next App &rarr;</h3>
-            <p>Was this tool helpful? Let us know how we can improve it</p>
-          </a>
-        </Link>
-      </div>
-    </div>
+  componentDidMount () {
+    this.setState({
+      bgImg: this.setCurrentHometown()
+    })
+  }
 
-    <Link href='/Home'>
-      <button>hello</button>
-    </Link>
-    
+  render () {
+    return (
+        <div className="home">
+          {this.state.bgImg && <Banner title="Welcome to my sh*t" backgroundImage={`url(${this.state.bgImg})`} />}
 
-    <style jsx>{`
-      .hero {
-        width: 100%;
-        color: #333;
-      }
-      .title {
-        margin: 0;
-        width: 100%;
-        padding-top: 80px;
-        line-height: 1.15;
-        font-size: 48px;
-      }
-      .title,
-      .description {
-        text-align: center;
-      }
-      .row {
-        max-width: 880px;
-        margin: 80px auto 40px;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-      }
-      .card {
-        padding: 18px 18px 24px;
-        width: 220px;
-        text-align: left;
-        text-decoration: none;
-        color: #434343;
-        border: 1px solid #9b9b9b;
-      }
-      .card:hover {
-        border-color: #067df7;
-      }
-      .card h3 {
-        margin: 0;
-        color: #067df7;
-        font-size: 18px;
-      }
-      .card p {
-        margin: 0;
-        padding: 12px 0 0;
-        font-size: 13px;
-        color: #333;
-      }
-    `}</style>
-  </div>
-)
+          <Who />
 
-export default Home
+          <What currentProject={this.props.currentProject}/>
+
+          <Contact />
+        </div>
+    );
+  }
+}
