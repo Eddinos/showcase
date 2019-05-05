@@ -9,9 +9,10 @@ import Banner from '../components/Banner/Banner';
 import Layout from '../components/Layout/Layout'
 // import DataContainer from '../../bonds/DataContainer/DataContainer';
 // import { Link } from 'react-router';
+import Link from 'next/link'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-// import { connect } from 'react-redux';
-// import { getAllProjects } from '../../../actions'
+import { connect } from 'react-redux';
+import { getAllProjects } from '../actions'
 
 const Intro = () => (
   <div className="intro content-text">
@@ -26,6 +27,7 @@ export class PortfolioPage extends Component {
   }
 
   componentWillMount () {
+    console.log(this.props)
     if (this.props.projects && this.props.projects.length === 0) {
       this.props.getProjects();
     }
@@ -39,18 +41,20 @@ export class PortfolioPage extends Component {
         <Presenter>
           {this.props.projects.map((item, key) => {
               return (
-                <Link to={"/portfolio/project/" + item.id} key={key}>
-                  <Card
-                    source={item.media}
-                    title={item.title}
-                    description={item.shortDescription}
-                  />
+                <Link href={"/portfolio/project/" + item.id} key={key}>
+                  <actions>
+                    <Card
+                      source={item.media}
+                      title={item.title}
+                      description={item.shortDescription}
+                    />
+                  </actions>
                 </Link>
               )
             })}
         </Presenter>
 
-        {this.props.children &&
+        {this.props.projects &&
           <div className="project-display">
             <ReactCSSTransitionGroup
               transitionName="swap"
@@ -81,23 +85,24 @@ export class PortfolioPage extends Component {
   }
 }
 
-// const mapStateToProps = (state) => {
-//   return {
-//     projects: state.projects
-//   }
-// }
+const mapStateToProps = (state) => {
+  return {
+    projects: state.projects
+  }
+}
 
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     getProjects () {
-//       dispatch(getAllProjects())
-//     }
-//   }
-// }
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getProjects () {
+      dispatch(getAllProjects())
+    }
+  }
+}
 
-// const Portfolio = connect(
-//   mapStateToProps,
-//   mapDispatchToProps
-// )(PortfolioPage)
+const Portfolio = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PortfolioPage)
 
-export default PortfolioPage
+
+export default Portfolio
