@@ -10,7 +10,8 @@ export default class Slider extends Component {
       classes: '',
       direction: props.direction,
       side: props.side,
-      animation: `${props.direction.toLowerCase()}From${this.makeCamelCase(props.side)}`
+      animation: `${props.direction.toLowerCase()}From${this.makeCamelCase(props.side)}`,
+      done: false
     }
   }
 

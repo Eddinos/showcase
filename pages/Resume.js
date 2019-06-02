@@ -1,13 +1,11 @@
 import React from 'react';
 import { Component, PropTypes } from 'react';
 import './Resume.scss';
-// import cvPDF from '../assets/cv.pdf'
-// import Slider from '../../bonds/Slider/Slider';
-// import Skills from '../../organisms/Skills/Skills';
+import Skills from '../components/Skills/Skills';
 import Duo from '../components/Duo/Duo'
 import Banner from '../components/Banner/Banner';
 import Slider from '../components/Slider/Slider';
-// import Experience from '../../molecules/Experience/Experience';
+import Experience from '../components/Experience/Experience';
 import bannerImg from '../assets/img/venice_desktop.jpg';
 // import { getXp, getSkills } from '../../../api'
 import { getAllSkills, getAllExperiences } from '../actions'
@@ -48,25 +46,25 @@ class ResumePage extends Component {
   }
 
   static async getInitialProps ({reduxStore, req}) {
+    console.log(reduxStore, getAllExperiences)
     reduxStore.dispatch(getAllExperiences());
     reduxStore.dispatch(getAllSkills());
-    // axios.get("http://snt-backend.herokuapp.com/staticData/experiences.json").then(data => console.log(data.data))
     
     return {};
   }
 
   componentDidMount() {
-    // if (this.props.experiences.length === 0) {
-    //   this.props.getExperiences();
-    // }
-    // if (this.props.skills.length === 0) {
-    //   this.props.getSkills();
-    // }
+    if (this.props.experiences.length === 0) {
+      this.props.getExperiences();
+    }
+    if (this.props.skills.length === 0) {
+      this.props.getSkills();
+    }
   }
 
   createSkillsComponents() {
     let skillsComponents = [];
-    let skills = this.props.skills;
+    let skills = this.props.skills || [];
     for (var type in skills) {
       if (skills.hasOwnProperty(type)) {
         skillsComponents.push(
@@ -100,7 +98,6 @@ class ResumePage extends Component {
   }
 
   render () {
-    console.log(this.props)
     return (
         <div className="resume">
           <Banner title="My resume" backgroundImage={`url(${bannerImg})`} />
@@ -132,9 +129,9 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-// const Resume = connect(
-//   mapStateToProps,
-//   mapDispatchToProps
-// )(ResumePage)
+const Resume = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ResumePage)
 
-export default connect(mapStateToProps)(ResumePage)
+export default Resume
