@@ -82,7 +82,7 @@ class ResumePage extends Component {
       return []
     }
     return this.props.experiences.map((item, key) => {
-      let logoCmpnt = <img className="xpLogo" src={item.logo} alt=""/>;
+      let logoCmpnt = <img className="xpLogo" src={`/static${item.logo}`} alt=""/>;
       let description = <Experience data={item} key={key}> banana </Experience>//<div className="content-text">{item.title}</div>;
       var eltLeft = key%2 === 0 ? logoCmpnt : description ;
       var eltRight = key%2 !== 0 ? logoCmpnt : description;
