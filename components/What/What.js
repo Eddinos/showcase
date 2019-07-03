@@ -6,11 +6,11 @@ export default (props) => {
       <div className="content-text">
         <h4>My projects</h4>
         <p>Check out my last realization, but also other school and personal works</p>
-        <a href='/portfolio' className="moreButton">See more projects</a>
+        <a href='/Portfolio' className="moreButton">See more projects</a>
       </div>
     );
     var exemple = props.currentProject ? (
-        <a href={`/portfolio/project/${props.currentProject.id}`}>
+        <a href={`/Portfolio/project/${props.currentProject.id}`}>
           <Card
             source={props.currentProject.media}
             title={props.currentProject.title}
