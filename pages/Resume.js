@@ -46,7 +46,6 @@ class ResumePage extends Component {
   }
 
   static async getInitialProps ({reduxStore, req}) {
-    console.log(reduxStore, getAllExperiences)
     reduxStore.dispatch(getAllExperiences());
     reduxStore.dispatch(getAllSkills());
     

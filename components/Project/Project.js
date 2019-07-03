@@ -1,25 +1,24 @@
 import React from 'react';
 import { Component, PropTypes } from 'react';
-import Progress from '../../atoms/Progress/Progress';
-import List from '../../atoms/List/List';
-import Reference from '../../atoms/Reference/Reference';
-import { Link } from 'react-router';
+import Progress from '../Progress/Progress';
+import List from '../List/List';
+import Reference from '../Reference/Reference';
 import {findDOMNode} from 'react-dom';
-import Text from '../../atoms/Text/Text';
+import Text from '../Text/Text';
+import Link from 'next/link'
 import './Project.scss'
 
 export default class Project extends Component {
   constructor (props) {
     super(props);
 
-    let newProject = props.projects[props.params.projectID-1];
+    let newProject = props.projects[props.projectID-1];
     let errorProject = false;
     if(!newProject) {
       errorProject = true;
     }
     this.state = {
-      projectID: props.params.projectID,
-      query: props.location.query,
+      projectID: props.projectID,
       currentProject: newProject,
       errorProject: errorProject
     }
@@ -41,18 +40,18 @@ export default class Project extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    let newProject = nextProps.projects[nextProps.params.projectID-1];
+    let newProject = nextProps.projects[nextProps.projectID-1];
     if (newProject) {
       this.setState({errorProject: false})
     }
     this.setState({
-      projectID: nextProps.params.projectID,
+      projectID: nextProps.projectID,
       currentProject: newProject
     });
   }
 
   getNavID (direction) {
-    let currentID = parseInt(this.props.params.projectID);
+    let currentID = parseInt(this.props.projectID);
     if (direction === 'left') {
       if (currentID > 1) {
         return currentID - 1;

@@ -7,6 +7,7 @@ import NavLink from '../components/NavLink/NavLink';
 import Presenter from '../components/Presenter/Presenter';
 import Banner from '../components/Banner/Banner';
 import Layout from '../components/Layout/Layout'
+import Project from '../components/Project/Project'
 // import DataContainer from '../../bonds/DataContainer/DataContainer';
 // import { Link } from 'react-router';
 import Link from 'next/link'
@@ -24,13 +25,21 @@ const Intro = () => (
 export class PortfolioPage extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      selectedProject: {}
+    }
   }
 
   componentWillMount () {
-    console.log(this.props)
+    // console.log(this.props)
     if (this.props.projects && this.props.projects.length === 0) {
       this.props.getProjects();
     }
+  }
+
+  selectProject (project) {
+      this.setState({selectedProject: project});
   }
 
   renderProjects () {
@@ -41,27 +50,25 @@ export class PortfolioPage extends Component {
         <Presenter>
           {this.props.projects.map((item, key) => {
               return (
-                <Link href={"/portfolio/project/" + item.id} key={key}>
-                  <actions>
+                <a onClick={() => this.selectProject(item)} key={key}>
                     <Card
                       source={item.media}
                       title={item.title}
                       description={item.shortDescription}
                     />
-                  </actions>
-                </Link>
+                </a>
               )
             })}
         </Presenter>
 
-        {this.props.projects &&
+        {(this.props.projects && this.state.selectedProject) &&
           <div className="project-display">
             <ReactCSSTransitionGroup
               transitionName="swap"
               transitionEnterTimeout={900}
               transitionLeaveTimeout={900}
             >
-                {React.cloneElement(React.Children.only(this.props.children), {key: page, projects: this.props.projects })}
+                <Project projects={this.props.projects} projectID={this.state.selectedProject.id}/>
             </ReactCSSTransitionGroup>
           </div>
         }
